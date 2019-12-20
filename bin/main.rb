@@ -12,21 +12,25 @@ POSITIONS = {
   9 => [2,2]
 }.freeze
 
-board = Array.new(3) { Array.new(3) }
+title = ' Tic Tac Toe Game '
+last_row = " ------------------------- ".center(80)
+middle_row = " |-----------------------| ".center(80)
 
 players = {
   0 => { name: nil, token: 'x' },
   1 => { name: nil, token: 'o'}
 }
 
-game_name = ' Tic Tac Toe Game '
-last_row = " ------------------------- ".center(80)
-middle_row = " |-----------------------| ".center(80)
+board = Array.new(3) { Array.new(3) }
 
-puts `clear`
-puts "".center(80, '=')
-puts game_name.center(80, '=')
-print "".center(80, '=') + "\n\n"
+def show_header(title)
+  puts `clear`
+  puts "".center(80, '=')
+  puts title.center(80, '=')
+  print "".center(80, '=') + "\n\n"
+end
+
+show_header(title)
 
 while 1
   2.times do |n|
@@ -53,7 +57,7 @@ while 1
 
   while winner == false
     puts "".center(80, '=')
-    puts game_name.center(80, '=')
+    puts title.center(80, '=')
     print "".center(80, '=') + "\n\n"
     row = 1
     step = 0
