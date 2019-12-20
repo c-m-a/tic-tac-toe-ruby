@@ -1,18 +1,19 @@
 #!/usr/bin/env ruby
 
 POSITIONS = {
-  1 => [0,0],
-  2 => [0,1],
-  3 => [0,2],
-  4 => [1,0],
-  5 => [1,1],
-  6 => [1,2],
-  7 => [2,0],
-  8 => [2,1],
-  9 => [2,2]
+  1 => [0, 0],
+  2 => [0, 1],
+  3 => [0, 2],
+  4 => [1, 0],
+  5 => [1, 1],
+  6 => [1, 2],
+  7 => [2, 0],
+  8 => [2, 1],
+  9 => [2, 2]
 }.freeze
 
 title = ' Tic Tac Toe Game '
+winner = false
 last_row = " ------------------------- ".center(80)
 middle_row = " |-----------------------| ".center(80)
 
@@ -23,16 +24,14 @@ players = {
 
 board = Array.new(3) { Array.new(3) }
 
-def show_header(title)
+def display_header(title)
   puts `clear`
   puts "".center(80, '=')
   puts title.center(80, '=')
   print "".center(80, '=') + "\n\n"
 end
 
-show_header(title)
-
-while 1
+def ask_names(players = Array)
   2.times do |n|
     player_number = n + 1
     print "Type the name of the player #{player_number}: "
@@ -41,16 +40,26 @@ while 1
     players[n][:name] = name.capitalize
     print "Hi #{name.capitalize}! Welcome to the Game! :)\n\n"
   end
+end
 
-  current_player = rand(0..1)
-  current_name = players[current_player][:name]
-  winner = false
+def display_who_starting(current_name)
   puts " Choosing randomdly who is going to start the game! :) ".center(80, '=')
-  puts "\n\nGreat #{current_name}!! You're starting first and you're (x))! :)".center(80)
+  puts "\n\n"
+  puts "Great #{current_name}!! You're starting first and you're (x))! :)".center(80)
 
   puts "\nWait a moment to start the game!...".center(80)
   sleep(3)
   puts `clear`
+end
+
+display_header(title)
+
+while 1
+  ask_names(players)
+
+  current_player = rand(0..1)
+  current_name = players[current_player][:name]
+  display_who_starting(current_name)
 
   # TODO: Starting new Game
   # ttt = Game.new()
@@ -63,7 +72,7 @@ while 1
     step = 0
     puts " ------------------------- ".center(80)
 
-    board.each do |x,y,z|
+    board.each do |x, y, z|
       x = x.nil? ? step + 1 : x
       y = y.nil? ? step + 2 : y
       z = z.nil? ? step + 3 : z
