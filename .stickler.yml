@@ -7,7 +7,6 @@ linters:
 
 files:
   ignore:
-    - "bin/*"
     - "db/*"
     - "config/*"
     - "Guardfile"
