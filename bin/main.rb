@@ -120,13 +120,14 @@ loop do
       if board[x][y].nil?
         board[x][y] = players[current_player][:token]
         break
+      else
+        puts 'Sorry that position was played!'
       end
     end
 
-    current_player = current_player.zero? ? 1 : 0
+    current_player = 1 if current_player.zero?
     current_name = players[current_player][:name]
     winner = check_winner
-    puts winner
   end
 
   next unless [true, -1].include? winner
