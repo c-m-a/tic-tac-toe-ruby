@@ -96,7 +96,7 @@ def display_final_menu(msg)
   puts 'To quit press (q)!'
 end
 
-def is_valid_position(position, current_name)
+def valid_position(position, current_name)
   unless position.between?(1, 9)
     puts "Upss! => #{current_name} wrong number! Type a number from 1-9."
     return false
@@ -109,7 +109,6 @@ def is_valid_position(position, current_name)
 
   true
 end
-
 
 display_header
 
@@ -133,6 +132,7 @@ loop do
       position = ask_position(current_name)
 
       next unless is_valid_position(position, current_name)
+
       x, y = POSITIONS[position]
 
       if board[x][y].nil?
@@ -159,6 +159,7 @@ loop do
   cmd = gets.chomp.strip.downcase
 
   break if cmd == 'q'
+
   board = Array.new(3) { Array.new(3) }
 end
 
