@@ -79,6 +79,23 @@ def check_winner
   booleans[n]
 end
 
+def init_game(board)
+  puts `clear`
+  display_board(board)
+end
+
+def ask_position(current_name)
+  print "\n=> #{current_name} type the position's number': "
+  gets.chomp.to_i
+end
+
+def display_final_menu(msg)
+  print "\n\n"
+  print msg.center(80)
+  puts "\nTo restart press (r)"
+  puts 'To quit press (q)!'
+end
+
 display_header
 
 loop do
@@ -93,28 +110,24 @@ loop do
   # ttt = Game.new()
 
   loop do
-    puts `clear`
-    display_board(board)
+    init_game(board)
 
     break if winner == true
 
     loop do
-      print "\n=> #{current_name} type the position's number': "
-      position = gets.chomp.to_i
+      position = ask_position(current_name)
 
       unless position.between?(1, 9)
         puts "Upss! => #{current_name} wrong number! Type a number from 1-9."
         next
       end
 
-      xy_pos = POSITIONS[position]
-
-      if xy_pos.nil?
+      if POSITIONS[position].nil?
         puts "Upss! => #{current_name} wrong input :(! Type a number from 1-9."
         next
       end
 
-      x, y = xy_pos
+      x, y = POSITIONS[position]
 
       if board[x][y].nil?
         board[x][y] = players[current_player][:token]
@@ -132,12 +145,10 @@ loop do
   next unless [true, -1].include? winner
 
   # If it's tie
-  msg = winner == -1 ? 'Sorry Guys is a tie' : "Congratulations (#{current_name})! You win!"
+  msg = winner == -1 ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
   winner = false
-  print "\n\n"
-  print msg.center(80)
-  puts "\nTo restart press (r)"
-  puts 'To quit press (q)!'
+
+  display_final_menu(msg)
   cmd = gets.chomp.strip.downcase
 
   case cmd
