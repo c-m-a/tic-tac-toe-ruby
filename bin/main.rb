@@ -100,8 +100,7 @@ loop do
 
     loop do
       print "\n=> #{current_name} type the position's number': "
-      position = gets.chomp
-      position = position.to_i
+      position = gets.chomp.to_i
 
       unless position.between?(1, 9)
         puts "Upss! => #{current_name} wrong number! Type a number from 1-9."
