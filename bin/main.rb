@@ -96,7 +96,7 @@ def display_final_menu(msg)
   puts 'To quit press (q)!'
 end
 
-def valid_position(position, current_name)
+def valid_position?(position, current_name)
   unless position.between?(1, 9)
     puts "Upss! => #{current_name} wrong number! Type a number from 1-9."
     return false
@@ -131,7 +131,7 @@ loop do
     loop do
       position = ask_position(current_name)
 
-      next unless is_valid_position(position, current_name)
+      next unless is_valid_position?(position, current_name)
 
       x, y = POSITIONS[position]
 
