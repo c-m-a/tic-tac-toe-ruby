@@ -96,6 +96,21 @@ def display_final_menu(msg)
   puts 'To quit press (q)!'
 end
 
+def is_valid_position(position, current_name)
+  unless position.between?(1, 9)
+    puts "Upss! => #{current_name} wrong number! Type a number from 1-9."
+    return false
+  end
+
+  if POSITIONS[position].nil?
+    puts "Upss! => #{current_name} wrong input :(! Type a number from 1-9."
+    return false
+  end
+
+  true
+end
+
+
 display_header
 
 loop do
@@ -117,16 +132,7 @@ loop do
     loop do
       position = ask_position(current_name)
 
-      unless position.between?(1, 9)
-        puts "Upss! => #{current_name} wrong number! Type a number from 1-9."
-        next
-      end
-
-      if POSITIONS[position].nil?
-        puts "Upss! => #{current_name} wrong input :(! Type a number from 1-9."
-        next
-      end
-
+      next unless is_valid_position(position, current_name)
       x, y = POSITIONS[position]
 
       if board[x][y].nil?
@@ -149,14 +155,11 @@ loop do
   winner = false
 
   display_final_menu(msg)
+
   cmd = gets.chomp.strip.downcase
 
-  case cmd
-  when 'q'
-    break
-  when 'r'
-    board = Array.new(3) { Array.new(3) }
-  end
+  break if cmd == 'q'
+  board = Array.new(3) { Array.new(3) }
 end
 
 puts 'Thanks for playing, bye!! :)'
