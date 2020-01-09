@@ -14,7 +14,6 @@ POSITIONS = {
 }.freeze
 
 TITLE = ' Tic Tac Toe Game '
-$winner = false
 
 players = {
   0 => { name: nil, token: 'x' },
@@ -89,10 +88,9 @@ def ask_position(current_name)
   gets.chomp.to_i
 end
 
-def end_game?(current_name)
+def end_game?(winner, current_name)
   # If it's tie
-  msg = $winner == -1 ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
-  $winner = false
+  msg = winner == -1 ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
 
   print "\n\n"
   print msg.center(80)
@@ -113,6 +111,7 @@ end
 display_header
 
 loop do
+  winner = false
   ask_names(players)
 
   current_player = rand(0..1)
@@ -126,7 +125,7 @@ loop do
   loop do
     init_game(board)
 
-    break if $winner == true
+    break if winner == true
 
     loop do
       position = ask_position(current_name)
@@ -145,13 +144,12 @@ loop do
 
     current_player = current_player.zero? ? 1 : 0
     current_name = players[current_player][:name]
-    $winner = check_winner
+    winner = check_winner
   end
 
-  p $winner
-  next unless [true, -1].include? $winner
+  next unless [true, -1].include? winner
 
-  break if end_game?(current_name)
+  break if end_game?(winner, current_name)
 
   board = Array.new(3) { Array.new(3) }
 end
