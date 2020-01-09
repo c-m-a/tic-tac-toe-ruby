@@ -13,19 +13,17 @@ class Game
   end
 
   def over?
-    check_winner
+    check_rows
+    check_columns
     @status
   end
 
   private
-  def check_winner
-    check_rows
-  end
-
-  def check_rows
+  def check_winner(board)
     t0 = @players[0][:token]
     t1 = @players[1][:token]
-    @board.each do |x, y, z|
+
+    board.each do |x, y, z|
       if t0 == x && t0 == y && t0 == z
         @status = true
         break
@@ -38,7 +36,12 @@ class Game
     end
   end
 
+  def check_rows
+    check_winner(@board)
+  end
+
   def check_columns
+    check_winner(@board.transpose)
   end
 
   def check_diagonals
