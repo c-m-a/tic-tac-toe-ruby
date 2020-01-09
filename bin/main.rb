@@ -110,9 +110,6 @@ loop do
 
   display_who_starting(ttt.players[current_player][:name])
 
-  # TODO: Starting new Game
-  # ttt = Game.new()
-
   loop do
     display_board(ttt.board)
 
