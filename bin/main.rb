@@ -104,17 +104,12 @@ def valid_position?(position, current_name)
   true
 end
 
-def choose_rand_player(players)
-  current_player = rand(0..1)
-  current_player
-end
-
 display_header
 
 loop do
   ask_names(players)
 
-  current_player = choose_rand_player(players)
+  current_player = rand(0..1)
 
   display_who_starting(players[current_player][:name])
 
