@@ -15,6 +15,7 @@ class Game
   def over?
     check_rows
     check_columns
+    check_diagonals
     @status
   end
 
@@ -45,5 +46,10 @@ class Game
   end
 
   def check_diagonals
+    @players.each do |player|
+      t = player[1][:token]
+      @status = true if t == @board[0][0] && t == @board[1][1] && t == @board[2][2]
+      @status = true if t == @board[0][2] && t == @board[1][1] && t == @board[2][0]
+    end
   end
 end
