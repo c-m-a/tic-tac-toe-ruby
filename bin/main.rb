@@ -13,8 +13,8 @@ POSITIONS = {
   9 => [2, 2]
 }.freeze
 
-TITLE = ' Tic Tac Toe Game '
-
+TITLE  = ' Tic Tac Toe Game '
+winner = false
 players = {
   0 => { name: nil, token: 'x' },
   1 => { name: nil, token: 'o' }
@@ -72,7 +72,7 @@ def display_board(board = Array)
   end
 end
 
-def check_winner
+def is_winner?
   n = rand(0..1)
   booleans = [true, false, -1]
   booleans[n]
@@ -91,6 +91,7 @@ end
 def end_game?(winner, current_name)
   # If it's tie
   msg = winner == -1 ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
+  winner = !winner
 
   print "\n\n"
   print msg.center(80)
@@ -108,14 +109,18 @@ def valid_position?(position, current_name)
   true
 end
 
+def choose_rand_player(players)
+  current_player = rand(0..1)
+  current_name = players[current_player][:name]
+  [current_player, current_name]
+end
+
 display_header
 
 loop do
-  winner = false
   ask_names(players)
 
-  current_player = rand(0..1)
-  current_name = players[current_player][:name]
+  current_player, current_name = choose_rand_player(players)
 
   display_who_starting(current_name)
 
@@ -125,7 +130,8 @@ loop do
   loop do
     init_game(board)
 
-    break if winner == true
+    winner = is_winner?
+    break if winner
 
     loop do
       position = ask_position(current_name)
@@ -144,7 +150,6 @@ loop do
 
     current_player = current_player.zero? ? 1 : 0
     current_name = players[current_player][:name]
-    winner = check_winner
   end
 
   next unless [true, -1].include? winner
