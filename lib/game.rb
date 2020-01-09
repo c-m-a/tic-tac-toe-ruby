@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class Game
-  attr_accessor :board, :players, :status
+  attr_accessor :board, :players
+  attr_reader :status, :left_moves
 
   def initialize
     @status = false
+    @left_moves = 7
     @board = Array.new(3) { Array.new(3) }
     @players = {
       0 => { name: nil, token: 'x' },
@@ -13,10 +15,13 @@ class Game
   end
 
   def over?
+    @left_moves -= 1
+
     check_rows
     check_columns
     check_diagonals
-    @status
+
+    @left_moves.zero? ? true: @status
   end
 
   private
