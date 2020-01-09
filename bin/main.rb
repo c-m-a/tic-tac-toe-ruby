@@ -108,15 +108,15 @@ loop do
 
   current_player = rand(0..1)
 
-  display_who_starting(ttt.players[current_player][:name])
+  display_who_starting(ttt.get_player_name(current_player))
 
   loop do
     display_board(ttt.board)
 
     loop do
-      position = ask_position(ttt.players[current_player][:name])
+      position = ask_position(ttt.get_player_name(current_player))
 
-      next unless valid_position?(position, ttt.players[current_player][:name])
+      next unless valid_position?(position, ttt.get_player_name(current_player))
 
       x, y = POSITIONS[position]
 
@@ -136,7 +136,7 @@ loop do
 
   next unless ttt.status
 
-  break if quit_game(ttt.left_moves, ttt.players[current_player][:name])
+  break if quit_game(ttt.left_moves, ttt.get_player_name(current_player))
 
   ttt = Game.new
 end
