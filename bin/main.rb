@@ -121,7 +121,7 @@ loop do
       x, y = POSITIONS[position]
 
       if ttt.board[x][y].nil?
-        ttt.board[x][y] = ttt.players[current_player][:token]
+        ttt.board[x][y] = ttt.get_player_token(current_player)
         display_board(ttt.board)
         break
       else
