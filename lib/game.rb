@@ -6,7 +6,7 @@ class Game
 
   def initialize
     @status = false
-    @left_moves = 7
+    @left_moves = 8
     @board = Array.new(3) { Array.new(3) }
     @players = {
       0 => { name: nil, token: 'x' },
