@@ -13,7 +13,7 @@ POSITIONS = {
   9 => [2, 2]
 }.freeze
 
-TITLE  = ' Tic Tac Toe Game '
+TITLE = ' Tic Tac Toe Game '
 winner = false
 players = {
   0 => { name: nil, token: 'x' },
@@ -51,6 +51,7 @@ def display_who_starting(current_name, wait = 1)
 end
 
 def display_board(board = Array)
+  puts `clear`
   row = 1
   step = 0
   last_row = ' ------------------------- '.center(80)
@@ -72,15 +73,10 @@ def display_board(board = Array)
   end
 end
 
-def is_winner?
+def over?
   n = rand(0..1)
   booleans = [true, false, -1]
   booleans[n]
-end
-
-def init_game(board)
-  puts `clear`
-  display_board(board)
 end
 
 def ask_position(current_name)
@@ -88,10 +84,9 @@ def ask_position(current_name)
   gets.chomp.to_i
 end
 
-def end_game?(winner, current_name)
+def game_over?(winner, current_name)
   # If it's tie
   msg = winner == -1 ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
-  winner = !winner
 
   print "\n\n"
   print msg.center(80)
@@ -111,8 +106,7 @@ end
 
 def choose_rand_player(players)
   current_player = rand(0..1)
-  current_name = players[current_player][:name]
-  [current_player, current_name]
+  [current_player, players[current_player][:name]]
 end
 
 display_header
@@ -128,10 +122,7 @@ loop do
   # ttt = Game.new()
 
   loop do
-    init_game(board)
-
-    winner = is_winner?
-    break if winner
+    display_board(board)
 
     loop do
       position = ask_position(current_name)
@@ -142,11 +133,15 @@ loop do
 
       if board[x][y].nil?
         board[x][y] = players[current_player][:token]
+        display_board(board)
         break
       else
         puts 'Sorry that position was played!'
       end
     end
+
+    winner = over?
+    break if winner
 
     current_player = current_player.zero? ? 1 : 0
     current_name = players[current_player][:name]
@@ -154,8 +149,9 @@ loop do
 
   next unless [true, -1].include? winner
 
-  break if end_game?(winner, current_name)
+  break if game_over?(winner, current_name)
 
+  winner = false
   board = Array.new(3) { Array.new(3) }
 end
 
