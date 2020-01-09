@@ -106,7 +106,7 @@ end
 
 def choose_rand_player(players)
   current_player = rand(0..1)
-  [current_player, players[current_player][:name]]
+  current_player
 end
 
 display_header
@@ -114,9 +114,9 @@ display_header
 loop do
   ask_names(players)
 
-  current_player, current_name = choose_rand_player(players)
+  current_player = choose_rand_player(players)
 
-  display_who_starting(current_name)
+  display_who_starting(players[current_player][:name])
 
   # TODO: Starting new Game
   # ttt = Game.new()
@@ -125,9 +125,9 @@ loop do
     display_board(board)
 
     loop do
-      position = ask_position(current_name)
+      position = ask_position(players[current_player][:name])
 
-      next unless valid_position?(position, current_name)
+      next unless valid_position?(position, players[current_player][:name])
 
       x, y = POSITIONS[position]
 
@@ -144,12 +144,11 @@ loop do
     break if winner
 
     current_player = current_player.zero? ? 1 : 0
-    current_name = players[current_player][:name]
   end
 
   next unless [true, -1].include? winner
 
-  break if game_over?(winner, current_name)
+  break if game_over?(winner, players[current_player][:name])
 
   winner = false
   board = Array.new(3) { Array.new(3) }
