@@ -24,6 +24,10 @@ class Game
     @left_moves.zero? ? true : @status
   end
 
+  def get_player_name(player_id)
+    @players[player_id][:name]
+  end
+
   private
 
   def check_winner(board)
