@@ -134,8 +134,6 @@ loop do
     current_player = current_player.zero? ? 1 : 0
   end
 
-  next unless ttt.status
-
   break if quit_game(ttt.left_moves, ttt.get_player_name(current_player))
 
   ttt = Game.new
