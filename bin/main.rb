@@ -89,20 +89,19 @@ def ask_position(current_name)
   gets.chomp.to_i
 end
 
-def display_final_menu(msg)
+def end_game?(winner, current_name)
+  # If it's tie
+  msg = winner == -1 ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
+
   print "\n\n"
   print msg.center(80)
-  puts "\nTo restart press (r)"
-  puts 'To quit press (q)!'
+  puts "\nRestart the game? (y/n)"
+
+  gets.chomp.strip.downcase == 'n'
 end
 
 def valid_position?(position, current_name)
-  unless position.between?(1, 9)
-    puts "Upss! => #{current_name} wrong number! Type a number from 1-9."
-    return false
-  end
-
-  if POSITIONS[position].nil?
+  if !position.between?(1, 9) || POSITIONS[position].nil?
     puts "Upss! => #{current_name} wrong input :(! Type a number from 1-9."
     return false
   end
@@ -131,7 +130,7 @@ loop do
     loop do
       position = ask_position(current_name)
 
-      next unless is_valid_position?(position, current_name)
+      next unless valid_position?(position, current_name)
 
       x, y = POSITIONS[position]
 
@@ -143,22 +142,14 @@ loop do
       end
     end
 
-    current_player = 1 if current_player.zero?
+    current_player = current_player.zero? ? 1 : 0
     current_name = players[current_player][:name]
     winner = check_winner
   end
 
   next unless [true, -1].include? winner
 
-  # If it's tie
-  msg = winner == -1 ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
-  winner = false
-
-  display_final_menu(msg)
-
-  cmd = gets.chomp.strip.downcase
-
-  break if cmd == 'q'
+  break if end_game?(winner, current_name)
 
   board = Array.new(3) { Array.new(3) }
 end
