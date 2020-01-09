@@ -28,6 +28,10 @@ class Game
     @players[player_id][:name]
   end
 
+  def get_player_token(player_id)
+    @players[player_id][:token]
+  end
+
   private
 
   def check_winner(board)
