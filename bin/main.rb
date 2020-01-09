@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require_relative '../lib/game'
+
 POSITIONS = {
   1 => [0, 0],
   2 => [0, 1],
@@ -14,13 +16,8 @@ POSITIONS = {
 }.freeze
 
 TITLE = ' Tic Tac Toe Game '
-winner = false
-players = {
-  0 => { name: nil, token: 'x' },
-  1 => { name: nil, token: 'o' }
-}
 
-board = Array.new(3) { Array.new(3) }
+ttt = Game.new
 
 def display_header
   puts `clear`
@@ -84,7 +81,7 @@ def ask_position(current_name)
   gets.chomp.to_i
 end
 
-def game_over?(winner, current_name)
+def quit_game(winner, current_name)
   # If it's tie
   msg = winner == -1 ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
 
@@ -107,46 +104,44 @@ end
 display_header
 
 loop do
-  ask_names(players)
+  ask_names(ttt.players)
 
   current_player = rand(0..1)
 
-  display_who_starting(players[current_player][:name])
+  display_who_starting(ttt.players[current_player][:name])
 
   # TODO: Starting new Game
   # ttt = Game.new()
 
   loop do
-    display_board(board)
+    display_board(ttt.board)
 
     loop do
-      position = ask_position(players[current_player][:name])
+      position = ask_position(ttt.players[current_player][:name])
 
-      next unless valid_position?(position, players[current_player][:name])
+      next unless valid_position?(position, ttt.players[current_player][:name])
 
       x, y = POSITIONS[position]
 
-      if board[x][y].nil?
-        board[x][y] = players[current_player][:token]
-        display_board(board)
+      if ttt.board[x][y].nil?
+        ttt.board[x][y] = ttt.players[current_player][:token]
+        display_board(ttt.board)
         break
       else
         puts 'Sorry that position was played!'
       end
     end
 
-    winner = over?
-    break if winner
+    break if ttt.over?
 
     current_player = current_player.zero? ? 1 : 0
   end
 
-  next unless [true, -1].include? winner
+  next unless [true, -1].include? ttt.status
 
-  break if game_over?(winner, players[current_player][:name])
+  break if quit_game(ttt.status, ttt.players[current_player][:name])
 
-  winner = false
-  board = Array.new(3) { Array.new(3) }
+  ttt = Game.new
 end
 
 puts 'Thanks for playing, bye!! :)'
