@@ -21,7 +21,7 @@ class Game
     check_columns
     check_diagonals
 
-    @left_moves.zero? ? true: @status
+    @left_moves.zero? ? true : @status
   end
 
   private
