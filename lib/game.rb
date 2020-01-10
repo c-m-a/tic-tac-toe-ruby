@@ -34,11 +34,6 @@ class Game
     @players[player_id][:token]
   end
 
-  def play_position(x_pos, y_pos, current_player)
-    token = @players[current_player][:token]
-    @board.set_position(x_pos, y_pos, token)
-  end
-
   def show_board
     @board.board
   end
