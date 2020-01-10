@@ -82,7 +82,7 @@ end
 
 def quit_game(winner, current_name)
   # If it's tie
-  msg = winner ? "Congratulations (#{current_name})! You win!" : "Excellent Game guys! It's a tie"
+  msg = winner ? "Congratulations (#{current_name})! You win!" : "Excellent Game guys! It's a tie!"
 
   print "\n\n"
   print msg.center(80)
