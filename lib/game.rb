@@ -43,7 +43,7 @@ class Game
   end
 
   def play_position(x_pos, y_pos, current_player)
-    token = self.get_player_token(current_player)
+    token = get_player_token(current_player)
     if @board.position_empty?(x_pos, y_pos)
       @board.set_position(x_pos, y_pos, token)
       return true
