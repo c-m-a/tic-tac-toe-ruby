@@ -26,14 +26,13 @@ def display_header
   print ''.center(80, '=') + "\n\n"
 end
 
-def ask_names(players = Array)
+def ask_names(ttt_obj)
   2.times do |n|
     player_number = n + 1
     print "Type the name of the player #{player_number}: "
     name = gets.chomp
-    name = 'Player ' + player_number.to_s if name.empty?
-    players[n][:name] = name.capitalize
-    print "Hi #{name.capitalize}! Welcome to the Game! :)\n\n"
+    ttt_obj.set_player_name(n, name.capitalize!) unless name.empty?
+    print "Hi #{ttt_obj.get_player_name(n)}! Welcome to the Game! :)\n\n"
   end
 end
 
@@ -104,7 +103,7 @@ end
 display_header
 
 loop do
-  ask_names(ttt.players)
+  ask_names(ttt)
 
   current_player = rand(0..1)
 
