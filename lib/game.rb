@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './board'
+require_relative './player'
 
 class Game
   attr_accessor :board, :players
@@ -11,8 +12,8 @@ class Game
     @left_moves = 9
     @board = Board.new
     @players = {
-      0 => { name: nil, token: 'x' },
-      1 => { name: nil, token: 'o' }
+      0 => Player.new('Player 1', 'x'),
+      1 => Player.new('Player 2', 'o')
     }
   end
 
@@ -27,11 +28,15 @@ class Game
   end
 
   def get_player_name(player_id)
-    @players[player_id][:name]
+    @players[player_id].name
+  end
+
+  def set_player_name(player_id, player_name)
+    @players[player_id].name = player_name
   end
 
   def get_player_token(player_id)
-    @players[player_id][:token]
+    @players[player_id].token
   end
 
   def show_board
@@ -39,7 +44,7 @@ class Game
   end
 
   def play_position(x_pos, y_pos, current_player)
-    token = @players[current_player][:token]
+    token = self.get_player_token(current_player)
     if @board.position_empty?(x_pos, y_pos)
       @board.set_position(x_pos, y_pos, token)
       return true
@@ -50,8 +55,8 @@ class Game
   private
 
   def check_winner(board)
-    t0 = @players[0][:token]
-    t1 = @players[1][:token]
+    t0 = get_player_token(0)
+    t1 = get_player_token(1)
 
     board.each do |x, y, z|
       @status = true if t0 == x && t0 == y && t0 == z
@@ -69,7 +74,7 @@ class Game
 
   def check_diagonals
     @players.each do |player|
-      t = player[1][:token]
+      t = player[1].token
       @status = true if t == @board.board[0][0] && t == @board.board[1][1] && t == @board.board[2][2]
       @status = true if t == @board.board[0][2] && t == @board.board[1][1] && t == @board.board[2][0]
     end
