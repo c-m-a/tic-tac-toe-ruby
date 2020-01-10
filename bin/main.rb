@@ -81,9 +81,9 @@ def ask_position(current_name)
   gets.chomp.to_i
 end
 
-def quit_game(left_moves, current_name)
+def quit_game(winner, current_name)
   # If it's tie
-  msg = left_moves.zero? ? "Sorry Guys! It's a tie" : "Congratulations (#{current_name})! You win!"
+  msg = winner ? "Congratulations (#{current_name})! You win!" : "Excellent Game guys! It's a tie"
 
   print "\n\n"
   print msg.center(80)
@@ -134,7 +134,7 @@ loop do
     current_player = current_player.zero? ? 1 : 0
   end
 
-  break if quit_game(ttt.left_moves, ttt.get_player_name(current_player))
+  break if quit_game(ttt.status, ttt.get_player_name(current_player))
 
   ttt = Game.new
 end
