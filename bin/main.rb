@@ -111,7 +111,7 @@ loop do
   display_who_starting(ttt.get_player_name(current_player))
 
   loop do
-    display_board(ttt.board)
+    display_board(ttt.show_board)
 
     loop do
       position = ask_position(ttt.get_player_name(current_player))
@@ -120,9 +120,8 @@ loop do
 
       x, y = POSITIONS[position]
 
-      if ttt.board[x][y].nil?
-        ttt.board[x][y] = ttt.get_player_token(current_player)
-        display_board(ttt.board)
+      if ttt.play_position(x, y, current_player)
+        display_board(ttt.show_board)
         break
       else
         puts 'Sorry that position was played!'
