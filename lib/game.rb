@@ -40,7 +40,7 @@ class Game
   end
 
   def show_board
-    @board.get_board
+    @board.board
   end
 
   def play_position(x, y, current_player)
@@ -65,18 +65,18 @@ class Game
   end
 
   def check_rows
-    check_winner(@board.get_board)
+    check_winner(@board.board)
   end
 
   def check_columns
-    check_winner(@board.get_board.transpose)
+    check_winner(@board.board.transpose)
   end
 
   def check_diagonals
     @players.each do |player|
       t = player[1][:token]
-      @status = true if t == @board.get_board[0][0] && t == @board.get_board[1][1] && t == @board.get_board[2][2]
-      @status = true if t == @board.get_board[0][2] && t == @board.get_board[1][1] && t == @board.get_board[2][0]
+      @status = true if t == @board.board[0][0] && t == @board.board[1][1] && t == @board.board[2][2]
+      @status = true if t == @board.board[0][2] && t == @board.board[1][1] && t == @board.board[2][0]
     end
   end
 end
