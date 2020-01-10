@@ -31,7 +31,7 @@ def ask_names(ttt_obj)
     player_number = n + 1
     print "Type the name of the player #{player_number}: "
     name = gets.chomp
-    ttt_obj.set_player_name(n, name.capitalize!) unless name.empty?
+    ttt_obj.set_player_name(n, name.capitalize) unless name.empty?
     print "Hi #{ttt_obj.get_player_name(n)}! Welcome to the Game! :)\n\n"
   end
 end
