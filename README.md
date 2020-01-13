@@ -5,7 +5,7 @@ Play Tic Tac Toe with your friends on the terminal coded on Ruby.
 ## Instructions
 
 This computer game is a implementation of "Tic Tac Toe" (American English) or "Noughts and crosses" (British English)
-where you have a piece or paper with a 3x3 grid, one of the players can choose between 2 figures such as
+where you have a piece or paper with a 3x3 grid, to play the game one of the players can choose between 2 figures such as
 "X" or "O" and anyone can choose to play the first move; the player who fills 3 Xs or Os in a vertical,
 horizontal or diagonal line wins.
 
@@ -45,17 +45,16 @@ cd tic-tac-toe-ruby/bin
 
 ## Instructions
 
-When you enter the game you will ask for the players' names, if you don't want to put your name
-the game will assign a default name.
+When the games starts, the players will be asked for their names, if they don't want to put any name
+it will be assigned a default name.
 
 The game will choose randomly who is going to start and it will show the board or grid.
 
-After that you will be asked to play a position which has a number assigned, you are allow to
-type a number between 1 and 9 to draw your token.
+Then every player will be asked to enter position between 1 and 9 where he/she wants to put the token.
 
 ![Screen shot](https://raw.githubusercontent.com/cma4c/tic-tac-toe-ruby/readme_game_instructions/docs/img/tic_tac_toe_board.png)
 
-When the game finish it will ask if you want to restart the game or quit pressing the 'n/N' key.
+When the game finishes it will ask to restart the game or quit pressing by the 'n/N' key.
 
 ## References
 
