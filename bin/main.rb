@@ -76,7 +76,7 @@ def over?
 end
 
 def ask_position(current_name)
-  print "\n=> #{current_name} type the position's number': "
+  print "\n=> #{current_name} type the position's number: "
   gets.chomp.to_i
 end
 
