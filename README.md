@@ -11,7 +11,7 @@ horizontal or diagonal line wins.
 
 **Eg.**
 
-[![Tic Tac Toe game example](https://en.wikipedia.org/wiki/File:Tic-tac-toe-game-1.svg)](https://www.wikipedia.org)
+![Tic Tac Toe game example](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Tic-tac-toe-game-1.svg/1920px-Tic-tac-toe-game-1.svg.png)
 
 In this case the player who chose the X token, and drew 3 consecutive in the 3 bottom grids won.
 
