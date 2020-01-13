@@ -29,7 +29,7 @@ This game was coded using Ruby 2.5.6 on GNU/Linux Ubuntu distro, but you can ins
 ## Installation
 
 1. Clone the repository.
-```
+```sh
 git clone https://github.com/cma4c/tic-tac-toe-ruby.git
 ```
 
@@ -57,7 +57,9 @@ When the game finish it will ask if you want to restart the game or quit pressin
 
 ## References
 
-TODO
+1. [Tic Tac Toe on Wikipedia](https://en.wikipedia.org/wiki/Tic-tac-toe).
+2. [Creating a Tic Tac Toe Game with Ruby](https://codequizzes.wordpress.com/2013/10/25/creating-a-tic-tac-toe-game-with-ruby/).
+3. [Another solution to code a Tic Tac Toe with Ruby](http://rosettacode.org/wiki/Tic-tac-toe#Ruby).
 
 ## About the author
 
