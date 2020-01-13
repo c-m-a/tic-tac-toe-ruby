@@ -53,6 +53,8 @@ The game will choose randomly who is going to start and it will show the board o
 After that you will be asked to play a position which has a number assigned, you are allow to
 type a number between 1 and 9 to draw your token.
 
+![Screen shot](https://raw.githubusercontent.com/cma4c/tic-tac-toe-ruby/readme_game_instructions/docs/img/tic_tac_toe_board.png)
+
 When the game finish it will ask if you want to restart the game or quit pressing the 'n/N' key.
 
 ## References
