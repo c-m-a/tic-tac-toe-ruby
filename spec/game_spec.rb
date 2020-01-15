@@ -29,4 +29,40 @@ RSpec.describe Game do
       end
     end
   end
+
+  describe '#set_player_name' do
+    context 'Set and get the player name # 1' do
+      let(:game) { Game.new }
+      it 'Returns player name # 1 set' do
+        player_name = 'Test 1'
+        player_id = 0
+        game.set_player_name(player_id, player_name)
+        expect(game.get_player_name(player_id)).to eq player_name
+      end
+    end
+    context 'Set and get the player name # 2' do
+      let(:game) { Game.new }
+      it 'Returns player name # 2 set' do
+        player_name = 'Test 2'
+        player_id = 1
+        game.set_player_name(player_id, player_name)
+        expect(game.get_player_name(player_id)).to eq player_name
+      end
+    end
+  end
+
+  describe '#get_player_token' do
+    context 'Check player token # 1' do
+      let(:game) { Game.new }
+      it 'Returns player token # 1' do
+        expect(game.get_player_token(0)).to eq 'x'
+      end
+    end
+    context 'Check player token # 2' do
+      let(:game) { Game.new }
+      it 'Returns player token # 2' do
+        expect(game.get_player_token(1)).to eq 'o'
+      end
+    end
+  end
 end
