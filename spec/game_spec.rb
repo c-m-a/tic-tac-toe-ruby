@@ -18,8 +18,8 @@ RSpec.describe Game do
     end
     context 'returns player\'s name number 2' do
       let(:game) { Game.new }
-      it 'returns Player 1' do
-        expect(game.get_player_name(0)).to eq 'Player 2'
+      it 'returns Player 2' do
+        expect(game.get_player_name(1)).to eq 'Player 2'
       end
     end
   end
