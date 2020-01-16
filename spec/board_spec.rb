@@ -23,5 +23,26 @@ RSpec.describe Board do
   end
 
   describe '#position_empty?' do
+    context 'Check all positions equal to nil' do
+      let(:grid) { Board.new }
+      it 'Returns Boolean' do
+        3.times do |i|
+          3.times do |j|
+            expect(grid.position_empty?(i, j)).to eq true
+          end
+        end
+      end
+    end
+    context 'Check position not nil' do
+      let(:grid) { Board.new }
+      it 'Returns Boolean' do
+        3.times do |i|
+          3.times do |j|
+            grid.set_position(i, j, 'x')
+            expect(grid.position_empty?(i, j)).to eq false
+          end
+        end
+      end
+    end
   end
 end
