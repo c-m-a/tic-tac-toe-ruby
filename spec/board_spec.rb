@@ -13,8 +13,15 @@ RSpec.describe Board do
   end
 
   describe '#set_position' do
+    context 'Set token position' do
+      let(:grid) { Board.new }
+      it 'Returns token from position set' do
+        grid.set_position(0, 0, 'x')
+        expect(grid.board[0][0]).to eq 'x'
+      end
+    end
   end
 
-  describe '#position_empty' do
+  describe '#position_empty?' do
   end
 end
