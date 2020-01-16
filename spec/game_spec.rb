@@ -89,6 +89,7 @@ RSpec.describe Game do
         3.times do |i|
           game = Game.new
           3.times do |j|
+            expect(game.over?).to eq false
             game.play_position(i, j, 0)
           end
           expect(game.over?).to eq true
@@ -102,6 +103,7 @@ RSpec.describe Game do
         3.times do |i|
           game = Game.new
           3.times do |j|
+            expect(game.over?).to eq false
             game.play_position(j, i, 0)
           end
           expect(game.over?).to eq true
@@ -126,6 +128,29 @@ RSpec.describe Game do
         game.play_position(1, 1, 0)
         game.play_position(2, 0, 0)
         expect(game.over?).to eq true
+      end
+    end
+
+    context 'Check tie game' do
+      let(:game) { Game.new }
+      it 'Returns a Boolean' do
+        # [x_pos, y_pos, player_id], ...
+        players_moves = [
+          [0, 0, 0],
+          [0, 1, 1],
+          [0, 2, 0],
+          [1, 0, 1],
+          [1, 1, 1],
+          [1, 2, 0],
+          [2, 0, 1],
+          [2, 1, 0],
+          [2, 2, 1]
+        ]
+        players_moves.each do |x_pos, y_pos, player_id|
+          last_position = x_pos == 2 && y_pos == 2
+          expect(game.play_position(x_pos, y_pos, player_id)).to eq true
+          expect(game.over?).to eq last_position ? true : false
+        end
       end
     end
   end
