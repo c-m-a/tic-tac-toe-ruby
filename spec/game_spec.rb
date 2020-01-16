@@ -104,7 +104,6 @@ RSpec.describe Game do
           3.times do |j|
             game.play_position(j, i, 0)
           end
-          p game.show_board
           expect(game.over?).to eq true
         end
       end
@@ -126,7 +125,6 @@ RSpec.describe Game do
         game.play_position(0, 2, 0)
         game.play_position(1, 1, 0)
         game.play_position(2, 0, 0)
-        p game.show_board
         expect(game.over?).to eq true
       end
     end
