@@ -65,4 +65,70 @@ RSpec.describe Game do
       end
     end
   end
+
+  describe '#play_position' do
+    context 'Check position set' do
+      let(:game) { Game.new }
+      it 'Returns an Array with position set' do
+        test_arr = Array.new(3) { Array.new(3) }
+        3.times do |i|
+          3.times do |j|
+            test_arr[i][j] = game.get_player_token(0)
+            game.play_position(i, j, 0)
+            expect(game.show_board).to eq test_arr
+          end
+        end
+      end
+    end
+  end
+
+  describe '#over?' do
+    context 'Check winning row' do
+      let(:game) { Game.new }
+      it 'Returns a Boolean' do
+        3.times do |i|
+          game = Game.new
+          3.times do |j|
+            game.play_position(i, j, 0)
+          end
+          expect(game.over?).to eq true
+        end
+      end
+    end
+
+    context 'Check winning column' do
+      let(:game) { Game.new }
+      it 'Returns a Boolean' do
+        3.times do |i|
+          game = Game.new
+          3.times do |j|
+            game.play_position(j, i, 0)
+          end
+          p game.show_board
+          expect(game.over?).to eq true
+        end
+      end
+    end
+
+    context 'Check winning first diagonal' do
+      let(:game) { Game.new }
+      it 'Returns a Boolean' do
+        game.play_position(0, 0, 0)
+        game.play_position(1, 1, 0)
+        game.play_position(2, 2, 0)
+        expect(game.over?).to eq true
+      end
+    end
+
+    context 'Check winning second diagonal' do
+      let(:game) { Game.new }
+      it 'Returns a Boolean' do
+        game.play_position(0, 2, 0)
+        game.play_position(1, 1, 0)
+        game.play_position(2, 0, 0)
+        p game.show_board
+        expect(game.over?).to eq true
+      end
+    end
+  end
 end
